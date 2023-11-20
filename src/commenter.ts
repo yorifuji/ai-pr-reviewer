@@ -764,8 +764,6 @@ ${chain}
 
 Currently reviewing new changes in this PR...
 
-${statusMsg}
-
 ${IN_PROGRESS_END_TAG}
 
 ---
