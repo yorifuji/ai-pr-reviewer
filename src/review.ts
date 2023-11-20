@@ -262,7 +262,9 @@ ${hunks.oldHunk}
     return
   }
 
-  let statusMsg = `'<!-- This is a place holder of status msg -->'`
+  let statusMsg = `レビューしました！
+<!-- This is a place holder of status msg -->
+`
 
   // update the existing comment with in progress status
   const inProgressSummarizeCmt = commenter.addInProgressStatus(
@@ -271,7 +273,7 @@ ${hunks.oldHunk}
   )
 
   // add in progress status to the summarize comment
-  await commenter.comment(`${inProgressSummarizeCmt}`, SUMMARIZE_TAG, 'replace')
+  // await commenter.comment(`${inProgressSummarizeCmt}`, SUMMARIZE_TAG, 'replace')
 
   const summariesFailed: string[] = []
 
@@ -419,7 +421,7 @@ ${filename}: ${summary}
   )
   inputs.shortSummary = summarizeShortResponse
 
-  let summarizeComment = `レビューしました
+  let summarizeComment = `
 ${RAW_SUMMARY_START_TAG}
 ${RAW_SUMMARY_END_TAG}
 ${SHORT_SUMMARY_START_TAG}
@@ -625,7 +627,7 @@ ${commentChain}
   }
 
   // post the final summary comment
-  await commenter.comment(`${summarizeComment}`, SUMMARIZE_TAG, 'replace')
+  // await commenter.comment(`${summarizeComment}`, SUMMARIZE_TAG, 'replace')
 }
 
 const splitPatch = (patch: string | null | undefined): string[] => {
