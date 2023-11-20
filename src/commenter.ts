@@ -761,7 +761,7 @@ ${chain}
     // otherwise do nothing
     if (start === -1 || end === -1) {
       return `${IN_PROGRESS_START_TAG}
-      レビュー中
+レビュー中
 ${IN_PROGRESS_END_TAG}
 `
     }
