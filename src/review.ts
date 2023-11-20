@@ -262,38 +262,7 @@ ${hunks.oldHunk}
     return
   }
 
-  let statusMsg = `<details>
-<summary>Commits</summary>
-Files that changed from the base of the PR and between ${highestReviewedCommitId} and ${
-    context.payload.pull_request.head.sha
-  } commits.
-</details>
-${
-  filesAndChanges.length > 0
-    ? `
-<details>
-<summary>Files selected (${filesAndChanges.length})</summary>
-
-* ${filesAndChanges
-        .map(([filename, , , patches]) => `${filename} (${patches.length})`)
-        .join('\n* ')}
-</details>
-`
-    : ''
-}
-${
-  filterIgnoredFiles.length > 0
-    ? `
-<details>
-<summary>Files ignored due to filter (${filterIgnoredFiles.length})</summary>
-
-* ${filterIgnoredFiles.map(file => file.filename).join('\n* ')}
-
-</details>
-`
-    : ''
-}
-`
+  let statusMsg = `'<!-- This is a place holder of status msg -->'`
 
   // update the existing comment with in progress status
   const inProgressSummarizeCmt = commenter.addInProgressStatus(
@@ -457,48 +426,6 @@ ${RAW_SUMMARY_END_TAG}
 ${SHORT_SUMMARY_START_TAG}
 ${inputs.shortSummary}
 ${SHORT_SUMMARY_END_TAG}
-
----
-
-<details>
-<summary>Uplevel your code reviews with CodeRabbit Pro</summary>
-
-### CodeRabbit Pro
-
-If you like this project, please support us by purchasing the [Pro version](https://coderabbit.ai). The Pro version has advanced context, superior noise reduction and several proprietary improvements compared to the open source version. Moreover, CodeRabbit Pro is free for open source projects.
-
-</details>
-`
-
-  statusMsg += `
-${
-  skippedFiles.length > 0
-    ? `
-<details>
-<summary>Files not processed due to max files limit (${
-        skippedFiles.length
-      })</summary>
-
-* ${skippedFiles.join('\n* ')}
-
-</details>
-`
-    : ''
-}
-${
-  summariesFailed.length > 0
-    ? `
-<details>
-<summary>Files not summarized due to errors (${
-        summariesFailed.length
-      })</summary>
-
-* ${summariesFailed.join('\n* ')}
-
-</details>
-`
-    : ''
-}
 `
 
   if (!options.disableReview) {
@@ -685,57 +612,6 @@ ${commentChain}
 
     await Promise.all(reviewPromises)
 
-    statusMsg += `
-${
-  reviewsFailed.length > 0
-    ? `<details>
-<summary>Files not reviewed due to errors (${reviewsFailed.length})</summary>
-
-* ${reviewsFailed.join('\n* ')}
-
-</details>
-`
-    : ''
-}
-${
-  reviewsSkipped.length > 0
-    ? `<details>
-<summary>Files skipped from review due to trivial changes (${
-        reviewsSkipped.length
-      })</summary>
-
-* ${reviewsSkipped.join('\n* ')}
-
-</details>
-`
-    : ''
-}
-<details>
-<summary>Review comments generated (${reviewCount + lgtmCount})</summary>
-
-* Review: ${reviewCount}
-* LGTM: ${lgtmCount}
-
-</details>
-
----
-
-<details>
-<summary>Tips</summary>
-
-### Chat with <img src="https://avatars.githubusercontent.com/in/347564?s=41&u=fad245b8b4c7254fe63dd4dcd4d662ace122757e&v=4" alt="Image description" width="20" height="20">  CodeRabbit Bot (\`@coderabbitai\`)
-- Reply on review comments left by this bot to ask follow-up questions. A review comment is a comment on a diff or a file.
-- Invite the bot into a review comment chain by tagging \`@coderabbitai\` in a reply.
-
-### Code suggestions
-- The bot may make code suggestions, but please review them carefully before committing since the line number ranges may be misaligned. 
-- You can edit the comment made by the bot and manually tweak the suggestion if it is slightly off.
-
-### Pausing incremental reviews
-- Add \`@coderabbitai: ignore\` anywhere in the PR description to pause further reviews from the bot.
-
-</details>
-`
     // add existing_comment_ids_block with latest head sha
     summarizeComment += `\n${commenter.addReviewedCommitId(
       existingCommitIdsBlock,
