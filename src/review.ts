@@ -419,7 +419,7 @@ ${filename}: ${summary}
   )
   inputs.shortSummary = summarizeShortResponse
 
-  let summarizeComment = `
+  let summarizeComment = `レビューしました
 ${RAW_SUMMARY_START_TAG}
 ${RAW_SUMMARY_END_TAG}
 ${SHORT_SUMMARY_START_TAG}
