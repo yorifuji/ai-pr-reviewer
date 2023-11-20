@@ -271,7 +271,7 @@ ${hunks.oldHunk}
   )
 
   // add in progress status to the summarize comment
-  // await commenter.comment(`${inProgressSummarizeCmt}`, SUMMARIZE_TAG, 'replace')
+  await commenter.comment(`${inProgressSummarizeCmt}`, SUMMARIZE_TAG, 'replace')
 
   const summariesFailed: string[] = []
 
@@ -625,7 +625,7 @@ ${commentChain}
   }
 
   // post the final summary comment
-  // await commenter.comment(`${summarizeComment}`, SUMMARIZE_TAG, 'replace')
+  await commenter.comment(`${summarizeComment}`, SUMMARIZE_TAG, 'replace')
 }
 
 const splitPatch = (patch: string | null | undefined): string[] => {
